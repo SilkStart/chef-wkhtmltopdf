@@ -4,7 +4,7 @@ default['wkhtmltopdf']['install_dir'] = '/usr/local/bin'
 default['wkhtmltopdf']['lib_dir']     = ''
 
 default['wkhtmltopdf-update']['major_version'] = '0.12'
-default['wkhtmltopdf-update']['version'] = '0.12.2.1'
+default['wkhtmltopdf-update']['version'] = '0.12.4'
 
 case node['platform_family']
 when 'mac_os_x', 'mac_os_x_server'
@@ -24,10 +24,7 @@ else
   )
   if node['kernel']['machine'] == 'x86_64'
     default['wkhtmltopdf-update']['platform'] = 'linux-amd64'
-    default['wkhtmltopdf-update']['package'] = value_for_platform_family(
-      %w(debian) => "wkhtmltox-#{node['wkhtmltopdf-update']['version']}_linux-trusty-amd64.deb",
-      %w(fedora rhel) => "wkhtmltox-#{node['wkhtmltopdf-update']['version']}_linux-centos6-amd64.rpm"
-    )
+    default['wkhtmltopdf-update']['package'] = "wkhtmltox-#{node['wkhtmltopdf-update']['version']}_linux-generic-amd64.deb"
   else
     default['wkhtmltopdf-update']['platform'] = 'linux-i386'
     default['wkhtmltopdf-update']['package'] = value_for_platform_family(
@@ -36,4 +33,4 @@ else
   end
 end
 
-default['wkhtmltopdf-update']['mirror_url'] = "http://download.gna.org/wkhtmltopdf/#{node['wkhtmltopdf-update']['major_version']}/#{node['wkhtmltopdf-update']['version']}/#{node['wkhtmltopdf-update']['package']}"
+default['wkhtmltopdf-update']['mirror_url'] = "http://downloads.wkhtmltopdf.org/#{node['wkhtmltopdf-update']['major_version']}/#{node['wkhtmltopdf-update']['version']}/#{node['wkhtmltopdf-update']['package']}"
